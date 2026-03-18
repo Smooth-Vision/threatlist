@@ -1,115 +1,137 @@
-# SV-SIEM Threat IP Blocklist
+# 🛡️ SV-SIEM Threat IP Blocklist
 
-Automatisch gegenereerde threat intelligence blocklist door [SV-SIEM](https://github.com/Smooth-Vision/threatlist).
+> Automatisch gegenereerde threat intelligence blocklist, samengesteld uit meerdere open-source feeds.
+> Geoptimaliseerd voor directe import in **FortiGate** firewalls via External Connectors.
+
+---
+
+## 📊 Overzicht
 
 | | |
-|---|---|
-| **Totaal IPs** | 445,281 |
-| **Aantal bestanden** | 13 chunks van max 35,000 |
-| **Laatste update** | 2026-03-18 09:57:19 UTC |
-| **Feeds** | abuseipdb, abuseipdb_community, blocklist_de, cinsscore, datashield, et_compromised, feodo, tor_exit |
+|:---|:---|
+| 🔢 **Totaal unieke IPs** | **445,281** |
+| 📦 **Chunk bestanden** | 13 bestanden (max 35,000 per bestand) |
+| 🔄 **Laatste update** | 2026-03-18 10:01:29 UTC |
+| 📡 **Actieve feeds** | 8 |
+
+### Bronnen
+
+| Feed | IPs |
+|:---|---:|
+| `abuseipdb` | 0 |
+| `abuseipdb_community` | 417,824 |
+| `blocklist_de` | 26,575 |
+| `cinsscore` | 15,000 |
+| `datashield` | 86,606 |
+| `et_compromised` | 668 |
+| `feodo` | 7,607 |
+| `tor_exit` | 1,162 |
 
 ---
 
-## Bestandsstructuur
+## 📁 Bestandsstructuur
 
 ```
-SV-SIEM-All-ThreatIPs-IPv4.txt          # Volledige lijst (445,281 IPs)
-Fortigate/
-  sv-siem-block-01.txt                   # Chunk 1 (max 35,000 IPs)
-  sv-siem-block-02.txt                   # Chunk 2
-  ...
-  sv-siem-block-13.txt                   # Chunk 13
+📂 Repository
+├── 📄 README.md
+├── 📄 SV-SIEM-All-ThreatIPs-IPv4.txt          ← Volledige lijst (445,281 IPs)
+└── 📂 Fortigate/
+    ├── 📄 sv-siem-block-01.txt                       ← max 35,000 IPs per bestand
+    ├── 📄 sv-siem-block-02.txt
+    ├── ...
+    └── 📄 sv-siem-block-13.txt
 ```
 
 ---
 
-## FortiGate Configuratie
+## 🔧 FortiGate Configuratie
 
-FortiGate External Connectors ondersteunen maximaal ~35.000 entries per connector.
-De blocklist is daarom opgesplitst in **13 bestanden**.
+FortiGate External Connectors ondersteunen maximaal **~35.000 entries** per connector.
+De blocklist is daarom automatisch opgesplitst in **13 bestanden**.
 
-### Stap 1 — External Connectors aanmaken
+---
 
-Ga naar **Security Fabric > External Connectors > Create New > IP Address** en maak
-voor elk bestand een connector aan. Of gebruik de CLI:
+### ⚡ Stap 1 — External Connectors aanmaken
 
-```
+Ga naar **Security Fabric → External Connectors → Create New → IP Address** en maak
+voor elk bestand een connector aan, of gebruik de CLI:
+
+```fortigate
 config system external-resource
     edit "sv-siem-block-01"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-02"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-03"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-04"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-05"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-06"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-07"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-08"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-09"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-10"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-11"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-12"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-13"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt"
         set refresh-rate 60
         set status enable
@@ -117,11 +139,13 @@ config system external-resource
 end
 ```
 
-### Stap 2 — Address Group aanmaken
+---
+
+### ⚡ Stap 2 — Address Group aanmaken
 
 Bundel alle connectors in een enkele Address Group:
 
-```
+```fortigate
 config firewall addrgrp
     edit "SV-SIEM-Blocklist"
         set member "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06" "sv-siem-block-07" "sv-siem-block-08" "sv-siem-block-09" "sv-siem-block-10" "sv-siem-block-11" "sv-siem-block-12" "sv-siem-block-13"
@@ -130,14 +154,18 @@ config firewall addrgrp
 end
 ```
 
-### Stap 3 — Firewall Policy
+---
 
-Gebruik de Address Group `SV-SIEM-Blocklist` in je firewall policies:
+### ⚡ Stap 3 — Firewall Policies
 
-```
+Gebruik de Address Group `SV-SIEM-Blocklist` in je firewall policies.
+
+**Inkomend verkeer blokkeren** (threat IPs als bron):
+
+```fortigate
 config firewall policy
     edit 0
-        set name "Block SV-SIEM Threats"
+        set name "Block SV-SIEM Threats Inbound"
         set srcintf "any"
         set dstintf "any"
         set srcaddr "SV-SIEM-Blocklist"
@@ -145,94 +173,116 @@ config firewall policy
         set action deny
         set schedule "always"
         set logtraffic all
-        set comments "Automatische blokkering op basis van SV-SIEM threat intelligence"
+        set comments "SV-SIEM threat intelligence - inkomend verkeer"
     next
 end
 ```
 
-> **Tip:** Maak ook een policy aan met `dstaddr "SV-SIEM-Blocklist"` om uitgaand
-> verkeer naar bekende threat IPs te blokkeren.
+**Uitgaand verkeer blokkeren** (verkeer naar threat IPs):
 
-### Stap 4 — Volledig script (copy-paste)
-
-Onderstaand script maakt alle connectors en de Address Group in een keer aan:
-
+```fortigate
+config firewall policy
+    edit 0
+        set name "Block SV-SIEM Threats Outbound"
+        set srcintf "any"
+        set dstintf "any"
+        set srcaddr "all"
+        set dstaddr "SV-SIEM-Blocklist"
+        set action deny
+        set schedule "always"
+        set logtraffic all
+        set comments "SV-SIEM threat intelligence - uitgaand verkeer"
+    next
+end
 ```
+
+> ⚠️ **Let op:** Plaats deze policies **boven** je reguliere allow-policies zodat ze voorrang krijgen.
+
+---
+
+### 📋 Volledig script (copy-paste)
+
+Onderstaand script maakt alle connectors, de Address Group en beide policies in één keer aan:
+
+<details>
+<summary>🔽 Klik om het volledige script te tonen</summary>
+
+```fortigate
 config system external-resource
     edit "sv-siem-block-01"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-02"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-03"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-04"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-05"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-06"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-07"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-08"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-09"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-10"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-11"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-12"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-13"
-        set category 0
+        set type address
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt"
         set refresh-rate 60
         set status enable
@@ -245,39 +295,68 @@ config firewall addrgrp
         set comment "SV-SIEM Threat Intelligence - 445,281 IPs"
     next
 end
+
+config firewall policy
+    edit 0
+        set name "Block SV-SIEM Threats Inbound"
+        set srcintf "any"
+        set dstintf "any"
+        set srcaddr "SV-SIEM-Blocklist"
+        set dstaddr "all"
+        set action deny
+        set schedule "always"
+        set logtraffic all
+        set comments "SV-SIEM threat intelligence - inkomend verkeer"
+    next
+end
+
+config firewall policy
+    edit 0
+        set name "Block SV-SIEM Threats Outbound"
+        set srcintf "any"
+        set dstintf "any"
+        set srcaddr "all"
+        set dstaddr "SV-SIEM-Blocklist"
+        set action deny
+        set schedule "always"
+        set logtraffic all
+        set comments "SV-SIEM threat intelligence - uitgaand verkeer"
+    next
+end
 ```
 
----
-
-## Direct downloaden
-
-| Bestand | URL |
-|---|---|
-| Volledige lijst | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/SV-SIEM-All-ThreatIPs-IPv4.txt` |
-| sv-siem-block-01 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt` |
-| sv-siem-block-02 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt` |
-| sv-siem-block-03 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt` |
-| sv-siem-block-04 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt` |
-| sv-siem-block-05 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt` |
-| sv-siem-block-06 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt` |
-| sv-siem-block-07 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt` |
-| sv-siem-block-08 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt` |
-| sv-siem-block-09 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt` |
-| sv-siem-block-10 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt` |
-| sv-siem-block-11 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt` |
-| sv-siem-block-12 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt` |
-| sv-siem-block-13 | `https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt` |
+</details>
 
 ---
 
-## Automatische updates
+## 🔗 Direct downloaden
 
-Deze lijsten worden **elk uur** automatisch bijgewerkt door SV-SIEM.
-FortiGate haalt de lijsten op volgens het ingestelde `refresh-rate` interval (standaard 60 minuten).
-
-Bij wijzigingen in het aantal IPs kan het aantal chunk-bestanden veranderen.
-Het FortiGate-script en de Address Group worden automatisch aangepast in deze README.
+| Bestand | Link |
+|:---|:---|
+| 📄 Volledige lijst | [`SV-SIEM-All-ThreatIPs-IPv4.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/SV-SIEM-All-ThreatIPs-IPv4.txt) |
+| 📦 Chunk 1/13 | [`sv-siem-block-01.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt) |
+| 📦 Chunk 2/13 | [`sv-siem-block-02.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt) |
+| 📦 Chunk 3/13 | [`sv-siem-block-03.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt) |
+| 📦 Chunk 4/13 | [`sv-siem-block-04.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt) |
+| 📦 Chunk 5/13 | [`sv-siem-block-05.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt) |
+| 📦 Chunk 6/13 | [`sv-siem-block-06.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt) |
+| 📦 Chunk 7/13 | [`sv-siem-block-07.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt) |
+| 📦 Chunk 8/13 | [`sv-siem-block-08.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt) |
+| 📦 Chunk 9/13 | [`sv-siem-block-09.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt) |
+| 📦 Chunk 10/13 | [`sv-siem-block-10.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt) |
+| 📦 Chunk 11/13 | [`sv-siem-block-11.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt) |
+| 📦 Chunk 12/13 | [`sv-siem-block-12.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt) |
+| 📦 Chunk 13/13 | [`sv-siem-block-13.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt) |
 
 ---
 
-*Gegenereerd door SV-SIEM op 2026-03-18 09:57:19 UTC*
+## 🔄 Automatische updates
+
+- Deze lijsten worden **elk uur** automatisch bijgewerkt door SV-SIEM
+- FortiGate haalt de lijsten op volgens het ingestelde `refresh-rate` interval (standaard 60 minuten)
+- Bij wijzigingen in het aantal IPs wordt het aantal chunk-bestanden automatisch aangepast
+- De FortiGate CLI-commando's in deze README worden automatisch bijgewerkt
+
+---
+
+<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:01:29 UTC</sub>
