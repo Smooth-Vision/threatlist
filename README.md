@@ -6,7 +6,7 @@ Automatisch gegenereerde threat intelligence blocklist door [SV-SIEM](https://gi
 |---|---|
 | **Totaal IPs** | 445,281 |
 | **Aantal bestanden** | 13 chunks van max 35,000 |
-| **Laatste update** | 2026-03-18 09:54:26 UTC |
+| **Laatste update** | 2026-03-18 09:57:19 UTC |
 | **Feeds** | abuseipdb, abuseipdb_community, blocklist_de, cinsscore, datashield, et_compromised, feodo, tor_exit |
 
 ---
@@ -37,79 +37,79 @@ voor elk bestand een connector aan. Of gebruik de CLI:
 ```
 config system external-resource
     edit "sv-siem-block-01"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-02"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-03"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-04"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-05"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-06"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-07"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-08"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-09"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-10"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-11"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-12"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-13"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt"
         set refresh-rate 60
         set status enable
@@ -160,79 +160,79 @@ Onderstaand script maakt alle connectors en de Address Group in een keer aan:
 ```
 config system external-resource
     edit "sv-siem-block-01"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-02"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-03"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-04"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-05"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-06"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-07"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-08"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-09"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-10"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-11"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-12"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt"
         set refresh-rate 60
         set status enable
     next
     edit "sv-siem-block-13"
-        set type ip
+        set category 0
         set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt"
         set refresh-rate 60
         set status enable
@@ -280,4 +280,4 @@ Het FortiGate-script en de Address Group worden automatisch aangepast in deze RE
 
 ---
 
-*Gegenereerd door SV-SIEM op 2026-03-18 09:54:26 UTC*
+*Gegenereerd door SV-SIEM op 2026-03-18 09:57:19 UTC*
