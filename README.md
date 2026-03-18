@@ -11,22 +11,8 @@
 |:---|:---|
 | 🔢 **Totaal unieke IPs** | **445,281** |
 | 📦 **Chunk bestanden** | 13 bestanden (max 35,000 per bestand) |
-| 🔄 **Laatste update** | 2026-03-18 10:01:29 UTC |
-| 📡 **Actieve feeds** | 8 |
-
-### Bronnen
-
-| Feed | IPs |
-|:---|---:|
-| `abuseipdb` | 0 |
-| `abuseipdb_community` | 417,824 |
-| `blocklist_de` | 26,575 |
-| `cinsscore` | 15,000 |
-| `datashield` | 86,606 |
-| `et_compromised` | 668 |
-| `feodo` | 7,607 |
-| `tor_exit` | 1,162 |
-
+| 🔄 **Laatste update** | 2026-03-18 10:06:34 UTC |
+| 📡 **Actieve feeds** | `abuseipdb`, `abuseipdb_community`, `blocklist_de`, `cinsscore`, `datashield`, `et_compromised`, `feodo`, `tor_exit` |
 ---
 
 ## 📁 Bestandsstructuur
@@ -139,6 +125,10 @@ config system external-resource
 end
 ```
 
+> ⏳ **Wacht 1-2 minuten** tot alle connectors hun eerste refresh hebben voltooid.
+> FortiGate maakt pas address objects aan na een succesvolle download.
+> Controleer de status via **Security Fabric → External Connectors** — alle entries moeten groen zijn.
+
 ---
 
 ### ⚡ Stap 2 — Address Group aanmaken
@@ -200,133 +190,6 @@ end
 
 ---
 
-### 📋 Volledig script (copy-paste)
-
-Onderstaand script maakt alle connectors, de Address Group en beide policies in één keer aan:
-
-<details>
-<summary>🔽 Klik om het volledige script te tonen</summary>
-
-```fortigate
-config system external-resource
-    edit "sv-siem-block-01"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-02"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-03"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-04"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-05"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-06"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-07"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-08"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-09"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-09.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-10"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-10.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-11"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-11.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-12"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-12.txt"
-        set refresh-rate 60
-        set status enable
-    next
-    edit "sv-siem-block-13"
-        set type address
-        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-13.txt"
-        set refresh-rate 60
-        set status enable
-    next
-end
-
-config firewall addrgrp
-    edit "SV-SIEM-Blocklist"
-        set member "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06" "sv-siem-block-07" "sv-siem-block-08" "sv-siem-block-09" "sv-siem-block-10" "sv-siem-block-11" "sv-siem-block-12" "sv-siem-block-13"
-        set comment "SV-SIEM Threat Intelligence - 445,281 IPs"
-    next
-end
-
-config firewall policy
-    edit 0
-        set name "Block SV-SIEM Threats Inbound"
-        set srcintf "any"
-        set dstintf "any"
-        set srcaddr "SV-SIEM-Blocklist"
-        set dstaddr "all"
-        set action deny
-        set schedule "always"
-        set logtraffic all
-        set comments "SV-SIEM threat intelligence - inkomend verkeer"
-    next
-end
-
-config firewall policy
-    edit 0
-        set name "Block SV-SIEM Threats Outbound"
-        set srcintf "any"
-        set dstintf "any"
-        set srcaddr "all"
-        set dstaddr "SV-SIEM-Blocklist"
-        set action deny
-        set schedule "always"
-        set logtraffic all
-        set comments "SV-SIEM threat intelligence - uitgaand verkeer"
-    next
-end
-```
-
-</details>
-
 ---
 
 ## 🔗 Direct downloaden
@@ -359,4 +222,4 @@ end
 
 ---
 
-<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:01:29 UTC</sub>
+<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:06:34 UTC</sub>
