@@ -10,8 +10,8 @@
 | | |
 |:---|:---|
 | 🔢 **Totaal unieke IPs** | **202,282** |
-| 📦 **Chunk bestanden** | 6 bestanden (max 35,000 per bestand) |
-| 🔄 **Laatste update** | 2026-03-18 10:25:43 UTC |
+| 📦 **Chunk bestanden** | 8 bestanden (max 35,000 per bestand) |
+| 🔄 **Laatste update** | 2026-03-18 10:39:36 UTC |
 | 📡 **Actieve feeds** | `abuseipdb`, `abuseipdb_community`, `blocklist_de`, `cinsscore`, `datashield`, `et_compromised`, `feodo`, `tor_exit` |
 ---
 
@@ -25,7 +25,7 @@
     ├── 📄 sv-siem-block-01.txt                       ← max 35,000 IPs per bestand
     ├── 📄 sv-siem-block-02.txt
     ├── ...
-    └── 📄 sv-siem-block-06.txt
+    └── 📄 sv-siem-block-08.txt
 ```
 
 ---
@@ -33,7 +33,7 @@
 ## 🔧 FortiGate Configuratie
 
 FortiGate External Connectors ondersteunen maximaal **~35.000 entries** per connector.
-De blocklist is daarom automatisch opgesplitst in **6 bestanden**.
+De blocklist is daarom automatisch opgesplitst in **8 bestanden**.
 
 ---
 
@@ -80,6 +80,18 @@ config system external-resource
         set refresh-rate 60
         set status enable
     next
+    edit "sv-siem-block-07"
+        set type address
+        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt"
+        set refresh-rate 60
+        set status enable
+    next
+    edit "sv-siem-block-08"
+        set type address
+        set resource "https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt"
+        set refresh-rate 60
+        set status enable
+    next
 end
 ```
 
@@ -101,7 +113,7 @@ config firewall policy
         set name "Block SV-SIEM Threats Inbound"
         set srcintf "any"
         set dstintf "any"
-        set srcaddr "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06"
+        set srcaddr "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06" "sv-siem-block-07" "sv-siem-block-08"
         set dstaddr "all"
         set action deny
         set service "ALL"
@@ -120,7 +132,7 @@ config firewall policy
         set srcintf "any"
         set dstintf "any"
         set srcaddr "all"
-        set dstaddr "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06"
+        set dstaddr "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06" "sv-siem-block-07" "sv-siem-block-08"
         set action deny
         set service "ALL"
         set schedule "always"
@@ -141,12 +153,14 @@ end
 | Bestand | Link |
 |:---|:---|
 | 📄 Volledige lijst | [`SV-SIEM-All-ThreatIPs-IPv4.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/SV-SIEM-All-ThreatIPs-IPv4.txt) |
-| 📦 Chunk 1/6 | [`sv-siem-block-01.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt) |
-| 📦 Chunk 2/6 | [`sv-siem-block-02.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt) |
-| 📦 Chunk 3/6 | [`sv-siem-block-03.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt) |
-| 📦 Chunk 4/6 | [`sv-siem-block-04.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt) |
-| 📦 Chunk 5/6 | [`sv-siem-block-05.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt) |
-| 📦 Chunk 6/6 | [`sv-siem-block-06.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt) |
+| 📦 Chunk 1/8 | [`sv-siem-block-01.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-01.txt) |
+| 📦 Chunk 2/8 | [`sv-siem-block-02.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-02.txt) |
+| 📦 Chunk 3/8 | [`sv-siem-block-03.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-03.txt) |
+| 📦 Chunk 4/8 | [`sv-siem-block-04.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-04.txt) |
+| 📦 Chunk 5/8 | [`sv-siem-block-05.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-05.txt) |
+| 📦 Chunk 6/8 | [`sv-siem-block-06.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-06.txt) |
+| 📦 Chunk 7/8 | [`sv-siem-block-07.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-07.txt) |
+| 📦 Chunk 8/8 | [`sv-siem-block-08.txt`](https://raw.githubusercontent.com/Smooth-Vision/threatlist/main/Fortigate/sv-siem-block-08.txt) |
 
 ---
 
@@ -159,4 +173,4 @@ end
 
 ---
 
-<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:25:43 UTC</sub>
+<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:39:36 UTC</sub>
