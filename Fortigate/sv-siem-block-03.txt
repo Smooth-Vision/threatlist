@@ -1,7 +1,3 @@
-# SV-SIEM Threat List — Part 3/13
-# Generated: 2026-03-18 10:06:33 UTC
-# IPs in this file: 35000 (total: 445281)
-# FortiGate External Connector compatible (max 35000 per file)
 45.134.91.232
 45.134.108.30
 45.134.108.238
