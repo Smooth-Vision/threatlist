@@ -11,7 +11,7 @@
 |:---|:---|
 | 🔢 **Totaal unieke IPs** | **445,281** |
 | 📦 **Chunk bestanden** | 13 bestanden (max 35,000 per bestand) |
-| 🔄 **Laatste update** | 2026-03-18 10:06:34 UTC |
+| 🔄 **Laatste update** | 2026-03-18 10:11:59 UTC |
 | 📡 **Actieve feeds** | `abuseipdb`, `abuseipdb_community`, `blocklist_de`, `cinsscore`, `datashield`, `et_compromised`, `feodo`, `tor_exit` |
 ---
 
@@ -222,4 +222,4 @@ end
 
 ---
 
-<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:06:34 UTC</sub>
+<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:11:59 UTC</sub>
