@@ -11,7 +11,7 @@
 |:---|:---|
 | 🔢 **Totaal unieke IPs** | **202,282** |
 | 📦 **Chunk bestanden** | 6 bestanden (max 35,000 per bestand) |
-| 🔄 **Laatste update** | 2026-03-18 10:16:05 UTC |
+| 🔄 **Laatste update** | 2026-03-18 10:25:43 UTC |
 | 📡 **Actieve feeds** | `abuseipdb`, `abuseipdb_community`, `blocklist_de`, `cinsscore`, `datashield`, `et_compromised`, `feodo`, `tor_exit` |
 ---
 
@@ -42,7 +42,7 @@ De blocklist is daarom automatisch opgesplitst in **6 bestanden**.
 Ga naar **Security Fabric → External Connectors → Create New → IP Address** en maak
 voor elk bestand een connector aan, of gebruik de CLI:
 
-```fortigate
+```
 config system external-resource
     edit "sv-siem-block-01"
         set type address
@@ -84,67 +84,53 @@ end
 ```
 
 > ⏳ **Wacht 1-2 minuten** tot alle connectors hun eerste refresh hebben voltooid.
-> FortiGate maakt pas address objects aan na een succesvolle download.
-> Controleer de status via **Security Fabric → External Connectors** — alle entries moeten groen zijn.
+> Controleer de status via **Security Fabric → External Connectors** of CLI:
+> `diagnose sys external-address-resource list`
 
 ---
 
-### ⚡ Stap 2 — Address Group aanmaken
+### ⚡ Stap 2 — Firewall Policies aanmaken
 
-Bundel alle connectors in een enkele Address Group:
-
-```fortigate
-config firewall addrgrp
-    edit "SV-SIEM-Blocklist"
-        set member "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06"
-        set comment "SV-SIEM Threat Intelligence - 202,282 IPs"
-    next
-end
-```
-
----
-
-### ⚡ Stap 3 — Firewall Policies
-
-Gebruik de Address Group `SV-SIEM-Blocklist` in je firewall policies.
+Alle connectors kunnen direct als address objects in firewall policies gebruikt worden.
 
 **Inkomend verkeer blokkeren** (threat IPs als bron):
 
-```fortigate
+```
 config firewall policy
     edit 0
         set name "Block SV-SIEM Threats Inbound"
         set srcintf "any"
         set dstintf "any"
-        set srcaddr "SV-SIEM-Blocklist"
+        set srcaddr "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06"
         set dstaddr "all"
         set action deny
+        set service "ALL"
         set schedule "always"
         set logtraffic all
-        set comments "SV-SIEM threat intelligence - inkomend verkeer"
     next
 end
 ```
 
 **Uitgaand verkeer blokkeren** (verkeer naar threat IPs):
 
-```fortigate
+```
 config firewall policy
     edit 0
         set name "Block SV-SIEM Threats Outbound"
         set srcintf "any"
         set dstintf "any"
         set srcaddr "all"
-        set dstaddr "SV-SIEM-Blocklist"
+        set dstaddr "sv-siem-block-01" "sv-siem-block-02" "sv-siem-block-03" "sv-siem-block-04" "sv-siem-block-05" "sv-siem-block-06"
         set action deny
+        set service "ALL"
         set schedule "always"
         set logtraffic all
-        set comments "SV-SIEM threat intelligence - uitgaand verkeer"
     next
 end
 ```
 
-> ⚠️ **Let op:** Plaats deze policies **boven** je reguliere allow-policies zodat ze voorrang krijgen.
+> ⚠️ **Belangrijk:** Plaats deze policies **bovenaan** je policy list (boven de allow-regels) zodat ze voorrang krijgen.
+> Dit kan via de GUI (drag & drop) of via CLI met `move`.
 
 ---
 
@@ -173,4 +159,4 @@ end
 
 ---
 
-<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:16:05 UTC</sub>
+<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-18 10:25:43 UTC</sub>
