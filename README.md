@@ -9,9 +9,9 @@
 
 | | |
 |:---|:---|
-| 🔢 **Totaal unieke IPs** | **211,185** |
+| 🔢 **Totaal unieke IPs** | **211,620** |
 | 📦 **Chunk bestanden** | 8 bestanden (max 35,000 per bestand) |
-| 🔄 **Laatste update** | 2026-03-27 21:24:42 UTC |
+| 🔄 **Laatste update** | 2026-03-27 22:24:56 UTC |
 | 📡 **Actieve feeds** | `abuseipdb`, `abuseipdb_community`, `blocklist_de`, `cinsscore`, `datashield`, `et_compromised`, `feodo`, `tor_exit` |
 ---
 
@@ -20,7 +20,7 @@
 ```
 📂 Repository
 ├── 📄 README.md
-├── 📄 SV-SIEM-All-ThreatIPs-IPv4.txt          ← Volledige lijst (211,185 IPs)
+├── 📄 SV-SIEM-All-ThreatIPs-IPv4.txt          ← Volledige lijst (211,620 IPs)
 └── 📂 Fortigate/
     ├── 📄 sv-siem-block-01.txt                       ← max 35,000 IPs per bestand
     ├── 📄 sv-siem-block-02.txt
@@ -177,4 +177,4 @@ end
 
 ---
 
-<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-27 21:24:42 UTC</sub>
+<sub>🤖 Automatisch gegenereerd door **SV-SIEM** op 2026-03-27 22:24:56 UTC</sub>
